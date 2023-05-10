@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     while True:
         #replace user with your USC username in all subscriptions
-        client.publish("gatua.usc.edu", f"{ip_address}")
+        client.publish("gatua/ee250/ip_address", f"{ip_address}")
         print("Publishing ip address")
         time.sleep(4)
 
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         current_date = now.strftime("%Y-%m-%d")
 
         #publish date and time in their own topics
-        client.publish("gatua.usc.edu/ee250/time", f"{current_time}")
-        client.publish("gatua.usc.edu/ee250/date", f"{current_date}")
+        client.publish("gatua/ee250/time", f"{current_time}")
+        client.publish("gatua/ee250/date", f"{current_date}")
         print("Publishing date and time")
         time.sleep(4)
