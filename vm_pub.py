@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
 
 if __name__ == '__main__':
     #get IP address
-    ip_address=0 
+    ip_address=172.20.10.2 
     """your code here"""
     #create a client object
     client = mqtt.Client()
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     client. If the connection request is successful, the callback attached to
     `client.on_connect` will be called."""
 
-    client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
+    client.connect(host="gatua.usc.edu", port=11000, keepalive=60)
 
     """ask paho-mqtt to spawn a separate thread to handle
     incoming and outgoing mqtt messages."""
@@ -41,11 +41,17 @@ if __name__ == '__main__':
 
     while True:
         #replace user with your USC username in all subscriptions
-        client.publish("user/ipinfo", f"{ip_address}")
+        client.publish("gatua.usc.edu", f"{ip_address}")
         print("Publishing ip address")
         time.sleep(4)
 
-        #get date and time 
-        """your code here"""
+        #get date and time         
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        current_date = now.strftime("%Y-%m-%d")
+
         #publish date and time in their own topics
-        """your code here"""
+        client.publish("gatua.usc.edu/ee250/time", f"{current_time}")
+        client.publish("gatua.usc.edu/ee250/date", f"{current_date}")
+        print("Publishing date and time")
+        time.sleep(4)
